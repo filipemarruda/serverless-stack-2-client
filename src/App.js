@@ -1,3 +1,6 @@
+/* eslint-disable no-undef */
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 import React, { Component, Fragment } from 'react';
 import { Auth } from 'aws-amplify';
 import { Link, withRouter } from 'react-router-dom';
@@ -29,17 +32,17 @@ class App extends Component {
     this.setState({ isAuthenticating: false });
   }
 
-  userHasAuthenticated = authenticated => {
+  userHasAuthenticated (authenticated) {
     this.setState({ isAuthenticated: authenticated });
-  };
+  }
 
-  handleLogout = async event => {
+  async handleLogout (event) {
     await Auth.signOut();
 
     this.userHasAuthenticated(false);
 
     this.props.history.push('/login');
-  };
+  }
 
   render() {
     const childProps = {

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const dev = {
   s3: {
     REGION: 'us-east-1',

@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-undef */
 import React, { Component } from 'react';
 import { API } from 'aws-amplify';
 import { Elements, StripeProvider } from 'react-stripe-elements';
@@ -20,7 +22,7 @@ export default class Settings extends Component {
     });
   }
 
-  handleFormSubmit = async (storage, { token, error }) => {
+  async handleFormSubmit (storage, { token, error }) {
     if (error) {
       alert(error);
       return;
@@ -40,7 +42,7 @@ export default class Settings extends Component {
       alert(e);
       this.setState({ isLoading: false });
     }
-  };
+  }
 
   render() {
     return (

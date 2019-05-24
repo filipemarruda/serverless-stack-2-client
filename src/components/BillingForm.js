@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import { CardElement, injectStripe } from 'react-stripe-elements';
@@ -20,19 +21,19 @@ class BillingForm extends Component {
     return this.state.name !== '' && this.state.storage !== '' && this.state.isCardComplete;
   }
 
-  handleFieldChange = event => {
+  handleFieldChange(event) {
     this.setState({
       [event.target.id]: event.target.value,
     });
-  };
+  }
 
-  handleCardFieldChange = event => {
+  handleCardFieldChange(event) {
     this.setState({
       isCardComplete: event.complete,
     });
-  };
+  }
 
-  handleSubmitClick = async event => {
+  async handleSubmitClick(event) {
     event.preventDefault();
 
     const { name } = this.state;
@@ -44,7 +45,7 @@ class BillingForm extends Component {
     this.setState({ isProcessing: false });
 
     this.props.onSubmit(this.state.storage, { token, error });
-  };
+  }
 
   render() {
     const loading = this.state.isProcessing || this.props.loading;
