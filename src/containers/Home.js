@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { API } from "aws-amplify";
-import { Link } from "react-router-dom";
-import { LinkContainer } from "react-router-bootstrap";
-import { PageHeader, ListGroup, ListGroupItem } from "react-bootstrap";
-import "./Home.css";
+import React, { Component } from 'react';
+import { API } from 'aws-amplify';
+import { Link } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
+import { PageHeader, ListGroup, ListGroupItem } from 'react-bootstrap';
+import './Home.css';
 
 export default class Home extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ export default class Home extends Component {
 
     this.state = {
       isLoading: true,
-      notes: []
+      notes: [],
     };
   }
 
@@ -31,31 +31,26 @@ export default class Home extends Component {
   }
 
   notes() {
-    return API.get("notes", "/notes");
+    return API.get('notes', '/notes');
   }
 
   renderNotesList(notes) {
-    return [{}].concat(notes).map(
-      (note, i) =>
-        i !== 0
-          ? <LinkContainer
-              key={note.noteId}
-              to={`/notes/${note.noteId}`}
-            >
-              <ListGroupItem header={note.content.trim().split("\n")[0]}>
-                {"Created: " + new Date(note.createdAt).toLocaleString()}
-              </ListGroupItem>
-            </LinkContainer>
-          : <LinkContainer
-              key="new"
-              to="/notes/new"
-            >
-              <ListGroupItem>
-                <h4>
-                  <b>{"\uFF0B"}</b> Create a new note
-                </h4>
-              </ListGroupItem>
-            </LinkContainer>
+    return [{}].concat(notes).map((note, i) =>
+      i !== 0 ? (
+        <LinkContainer key={note.noteId} to={`/notes/${note.noteId}`}>
+          <ListGroupItem header={note.content.trim().split('\n')[0]}>
+            {'Created: ' + new Date(note.createdAt).toLocaleString()}
+          </ListGroupItem>
+        </LinkContainer>
+      ) : (
+        <LinkContainer key="new" to="/notes/new">
+          <ListGroupItem>
+            <h4>
+              <b>{'\uFF0B'}</b> Create a new note
+            </h4>
+          </ListGroupItem>
+        </LinkContainer>
+      ),
     );
   }
 
@@ -63,7 +58,7 @@ export default class Home extends Component {
     return (
       <div className="lander">
         <h1>Scratch</h1>
-        <p>A simple note taking app</p>
+        <p>A very expensive note taking app</p>
         <div>
           <Link to="/login" className="btn btn-info btn-lg">
             Login
@@ -80,18 +75,12 @@ export default class Home extends Component {
     return (
       <div className="notes">
         <PageHeader>Your Notes</PageHeader>
-        <ListGroup>
-          {!this.state.isLoading && this.renderNotesList(this.state.notes)}
-        </ListGroup>
+        <ListGroup>{!this.state.isLoading && this.renderNotesList(this.state.notes)}</ListGroup>
       </div>
     );
   }
 
   render() {
-    return (
-      <div className="Home">
-        {this.props.isAuthenticated ? this.renderNotes() : this.renderLander()}
-      </div>
-    );
+    return <div className="Home">{this.props.isAuthenticated ? this.renderNotes() : this.renderLander()}</div>;
   }
 }
