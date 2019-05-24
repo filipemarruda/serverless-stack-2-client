@@ -14,7 +14,6 @@ export default class Home extends Component {
       notes: [],
     };
   }
-
   async componentDidMount() {
     if (!this.props.isAuthenticated) {
       return;
